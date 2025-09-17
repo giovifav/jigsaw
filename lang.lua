@@ -1,0 +1,122 @@
+local translations = {
+    it = {
+        menu = "Menu",
+        pausa = "Pausa",
+        riprendi = "Riprendi",
+        nuova_partita = "Nuova partita",
+        tempo = "Tempo",
+        mosse = "Mosse",
+        resume_popup = "Riprendi la partita salvata?",
+        scegli_difficolta = "Scegli la difficoltà (numero di pezzi per lato):",
+        facile = "Facile (3x3)",
+        normale = "Normale (4x4)",
+        difficile = "Difficile (5x5)",
+        esperto = "Esperto (6x6)",
+        maestro = "Maestro (7x7)",
+        genio = "Genio (8x8)",
+        menu_gioca = "Gioca",
+        menu_esci = "Esci",
+        menu_difficolta = "Difficoltà",
+        titolo = "Puzzle Jigsaw",
+        vittoria = "Hai vinto!",
+        consigli = "Consigli",
+        indietro = "Indietro",
+        inizia = "Inizia",
+        classifica = "Classifica",
+        rigioca = "Rigioca",
+        musica_mute = "Musica OFF",
+        musica_unmute = "Musica ON",
+        suoni_mute = "Suoni OFF",
+        suoni_unmute = "Suoni ON",
+        hardcore_mode = "Modalità Hardcore",
+        hardcore = "Hardcore",
+        hardcore_tooltip = "Modalità Hardcore: nessun aiuto, nessun pezzo bloccato, nessuna anteprima.",
+        conferma_cancella_leaderboard = "Sei sicuro di voler cancellare la classifica?",
+        conferma = "Conferma",
+        annulla = "Annulla",
+        settings = "Impostazioni",
+        settings_language = "Lingua",
+        settings_music = "Musica",
+        settings_sound = "Suoni",
+        settings_close = "Chiudi",
+        settings_fullscreen = "Schermo intero",
+        settings_fullscreen_tooltip = "Attiva o disattiva la modalità schermo intero.",
+        categoria_paesaggi = "Paesaggi",
+        categoria_architettura = "Architettura",
+        categoria_altro = "Altro",
+        categoria_persone = "Persone",
+        categoria_animali = "Animali",
+        settings_credits = "Crediti",
+        credits = "Crediti",
+        -- aggiungi altre stringhe qui
+    },
+    en = {
+        menu = "Menu",
+        pausa = "Pause",
+        riprendi = "Resume",
+        nuova_partita = "New game",
+        tempo = "Time",
+        mosse = "Moves",
+        resume_popup = "Resume saved game?",
+        scegli_difficolta = "Choose difficulty (number of pieces per side):",
+        facile = "Easy (3x3)",
+        normale = "Normal (4x4)",
+        difficile = "Hard (5x5)",
+        esperto = "Expert (6x6)",
+        maestro = "Master (7x7)",
+        genio = "Genius (8x8)",
+        menu_gioca = "Play",
+        menu_esci = "Exit",
+        menu_difficolta = "Difficulty",
+        titolo = "Jigsaw Puzzle",
+        vittoria = "You won!",
+        consigli = "Tips",
+        indietro = "Back",
+        inizia = "Start",
+        classifica = "Leaderboard",
+        rigioca = "Replay",
+        musica_mute = "Mute music",
+        musica_unmute = "Unmute music",
+        suoni_mute = "Mute sounds",
+        suoni_unmute = "Unmute sounds",
+        hardcore_mode = "Hardcore Mode",
+        hardcore = "Hardcore",
+        hardcore_tooltip = "Hardcore Mode: no help, no locked pieces, no preview.",
+        conferma_cancella_leaderboard = "Are you sure you want to clear the leaderboard?",
+        conferma = "Confirm",
+        annulla = "Cancel",
+        settings = "Settings",
+        settings_language = "Language",
+        settings_music = "Music",
+        settings_sound = "Sounds",
+        settings_close = "Close",
+        settings_fullscreen = "Fullscreen",
+        settings_fullscreen_tooltip = "Toggle fullscreen mode.",
+        categoria_paesaggi = "Landscapes",
+        categoria_architettura = "Architecture",
+        categoria_altro = "Other",
+        categoria_persone = "People",
+        categoria_animali = "Animals",
+        settings_credits = "Credits",
+        credits = "Credits",
+        -- add more strings here
+    }
+}
+
+local current_lang = "it"
+
+local function set_language(lang)
+    if translations[lang] then
+        current_lang = lang
+    end
+end
+
+local function t(key)
+    return translations[current_lang][key] or key
+end
+
+return {
+    t = t,
+    set_language = set_language,
+    current_lang = function() return current_lang end
+} 
