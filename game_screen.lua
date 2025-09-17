@@ -1,12 +1,19 @@
+-- Modulo per la gestione della schermata di gioco Jigsaw Puzzle
+-- Integra il modulo puzzle e fornisce controlli aggiuntivi per menu e pausa, oltre a callback per eventi di gioco.
+
+-- Moduli richiesti
 local puzzle = require "puzzle"
 local ui = require "ui"
 local lang = require "lang"
 
+-- Tabella principale del modulo GameScreen
 local GameScreen = {}
 
+-- Funzione che disegna la schermata di gioco
+-- Chiama puzzle.draw() per il puzzle principale e aggiunge i pulsanti menu e pausa
 function GameScreen.draw()
     puzzle.draw()
-    -- Menu Button
+       
     local btnMenuW, btnMenuH = 120, 48
     local btnMenuX, btnMenuY = 20, 20
     ui.drawButton(btnMenuX, btnMenuY, btnMenuW, btnMenuH, lang.t("menu"), nil, {fontSize=16, radius=9})
@@ -91,5 +98,7 @@ function GameScreen.touchreleased(id, x, y, dx, dy, pressure) end
 function GameScreen.keypressed(key)
     -- Gestione dei tasti (vuota per ora)
 end
+
+-- Restituisce la tabella GameScreen per renderla disponibile ad altri moduli del gioco
 
 return GameScreen

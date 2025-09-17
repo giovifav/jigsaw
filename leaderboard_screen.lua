@@ -1,14 +1,28 @@
+-- Modulo per la gestione della schermata classifica (leaderboard) dopo la vittoria nel puzzle
+-- Visualizza i risultati migliori con statistiche, permette di rilanciare il gioco e evidenzia il punteggio attuale
+
+-- Moduli richiesti per funzionamento: puzzle per dati, ui per disegno, lang per traduzioni, difficulty per impostazioni
 local puzzle = require "puzzle"
 local ui = require "ui"
 local lang = require "lang"
 local difficulty = require "difficulty"
 
+-- Tabella principale del modulo leaderboard_screen
 local LeaderboardScreen = {}
 
+-- Risultato dell'ultima partita vinta, utilizzato per evidenziare nella tabella della classifica
 LeaderboardScreen.lastResult = nil
+
+-- Immagine del puzzle appena completato, per mostrare come sfondo con effetto
 LeaderboardScreen.selectedImage = nil
+
+-- Numero di pezzi per il nuovo gioco quando si seleziona rigioca
 LeaderboardScreen.pendingStartN = nil
+
+-- Funzione per cambiare stato del gioco, impostata dal modulo main
 LeaderboardScreen.changeStateWithFade = nil -- to be set from main
+
+-- Funzione per avviare un nuovo puzzle, impostata dal modulo main
 LeaderboardScreen.startPuzzle = nil -- to be set from main
 
 function LeaderboardScreen.draw()

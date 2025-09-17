@@ -1,4 +1,10 @@
+-- Modulo per la gestione delle traduzioni del gioco Jigsaw Puzzle
+-- Permette di cambiare lingua e ottenere testi tradotti per interfaccia e messaggi
+
+-- Tabella contenente tutte le traduzioni disponibili
+-- Organizzate per lingua con chiavi corrispondenti ai testi dell'interfaccia
 local translations = {
+    -- Traduzioni per lingua italiana
     it = {
         menu = "Menu",
         pausa = "Pausa",
@@ -51,6 +57,7 @@ local translations = {
         credits = "Crediti",
         -- aggiungi altre stringhe qui
     },
+    -- Traduzioni per lingua inglese
     en = {
         menu = "Menu",
         pausa = "Pause",

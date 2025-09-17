@@ -1,14 +1,21 @@
+-- Modulo per la gestione dello schermo di selezione difficoltà
+-- Avvolge il modulo core difficulty e aggiunge controlli aggiuntivi per menu e pausa
+
+-- Moduli richiesti
 local difficulty = require "difficulty"
 local lang = require "lang"
 local ui = require "ui"
 
+-- Tabella principale del modulo DifficultyScreen
 local DifficultyScreen = {}
 
+-- Variabile per memorizzare il livello attualmente hoverato dal mouse
 local hovered = nil
 
+-- Funzione che disegna la schermata di selezione difficoltà e aggiunge tooltip per i livelli
 function DifficultyScreen.draw()
     difficulty.draw()
-    -- Tooltip
+    -- Tooltip per rivelare nome livello su hover
     if hovered then
         local i = nil
         for idx, n2 in ipairs(difficulty.levels) do if n2 == hovered then i = idx end end
@@ -43,8 +50,9 @@ function DifficultyScreen.draw()
     end
 end
 
+-- Gestisce gli eventi di pressione del mouse, controllo pulsanza menu e pausa, delega il resto al modulo difficulty
 function DifficultyScreen.mousepressed(x, y, button, changeStateWithFade)
-    -- Menu Button
+    -- Pulsante Menu in alto a sinistra
     local btnMenuW, btnMenuH = 120, 48
     local btnMenuX, btnMenuY = 20, 20
     if x >= btnMenuX and x <= btnMenuX+btnMenuW and y >= btnMenuY and y <= btnMenuY+btnMenuH then
@@ -62,6 +70,7 @@ function DifficultyScreen.mousepressed(x, y, button, changeStateWithFade)
     return difficulty.mousepressed(x, y, button)
 end
 
+-- Funzioni stub per eventi input non utilizzati (per compatibilità con il framework)
 function DifficultyScreen.wheelmoved(x, y) end
 function DifficultyScreen.mousemoved(x, y, dx, dy) end
 function DifficultyScreen.mousereleased(x, y, button) end
@@ -69,8 +78,8 @@ function DifficultyScreen.touchpressed(id, x, y, dx, dy, pressure) end
 function DifficultyScreen.touchmoved(id, x, y, dx, dy, pressure) end
 function DifficultyScreen.touchreleased(id, x, y, dx, dy, pressure) end
 
+-- Funzione che aggiorna lo stato dell'hover basandosi sulla posizione del mouse
 function DifficultyScreen.update(dt, changeStateWithFade)
-    -- Update hovered
     hovered = nil
     local mx, my = love.mouse.getPosition()
     for i, n in ipairs(difficulty.levels) do
@@ -83,8 +92,9 @@ function DifficultyScreen.update(dt, changeStateWithFade)
     end
 end
 
+-- Funzione vuota per eventi tastiera per compatibilità
 function DifficultyScreen.keypressed(key)
-    -- Funzione vuota per compatibilità
 end
 
-return DifficultyScreen 
+-- Restituisce la tabella DifficultyScreen per l'importazione
+return DifficultyScreen

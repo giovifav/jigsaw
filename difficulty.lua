@@ -1,13 +1,29 @@
+-- Modulo per la selezione della difficoltà nel gioco Jigsaw Puzzle
+-- Gestisce la schermata di scelta livello, inclusa la modalità hardcore e l'interfaccia utente.
+
+-- Tabella principale del modulo difficulty
 local difficulty = {}
+
+-- Moduli richiesti per traduzioni, suoni e interfaccia utente
 local lang = require "lang"
 local sound = require "sound"
 local ui = require "ui"
 
+-- Configurazione dei livelli di difficoltà
+-- Lista dei livelli disponibili, dove ogni numero rappresenta quante righe/colonne di pezzi ha il puzzle
 difficulty.levels = {3, 4, 5, 6, 7, 8}
+
+-- Livello attualmente selezionato dall'utente (default 3 per iniziare facile)
 difficulty.selectedN = 3
+
+-- Flag per abilitare la modalità hardcore, che cambia le regole del gioco
 difficulty.hardcore = false
+
+-- Variabile temporanea per memorizzare quale livello sta venendo hoverato dal mouse
 local hovered = nil
 
+-- Funzione principale che disegna la schermata di selezione difficoltà
+-- Include sfondo, titoli, bottoni livelli, checkbox hardcore, e tooltips
 function difficulty.draw()
     -- Sfondo sfumato chiaro
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
@@ -115,6 +131,8 @@ function difficulty.draw()
     end
 end
 
+-- Funzione che gestisce gli eventi di pressione del mouse sulla schermata
+-- Parametri: x, y coordinate del click; button pulsante mouse premuto (opzionale)
 function difficulty.mousepressed(x, y, button)
     local w = love.graphics.getWidth()
     -- Pulsante Indietro
@@ -155,4 +173,6 @@ function difficulty.mousepressed(x, y, button)
     return false
 end
 
-return difficulty 
+-- Restituisce la tabella difficulty per essere importata e utilizzata da altri moduli del gioco
+
+return difficulty
