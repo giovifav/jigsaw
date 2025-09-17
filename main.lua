@@ -97,7 +97,11 @@ function startPuzzle(imgName, n, reset, hardcore)
             return
         end
     end
-    puzzle.load("img/"..imgName, n, hardcore)
+    if imgName:match("^user_images/") then
+        puzzle.load(imgName, n, hardcore)
+    else
+        puzzle.load("img/"..imgName, n, hardcore)
+    end
     state = "gioco"
     print("CAMBIO STATO: state = gioco")
     _G.state = "gioco"
@@ -305,4 +309,33 @@ function love.touchreleased(id, x, y, dx, dy, pressure)
     elseif state == "pausa" then
         PauseScreen.touchreleased(id, x, y, dx, dy, pressure)
     end
+end
+
+function love.filedropped(file)
+    if _G.state ~= "menu" then return end
+
+    local filename = file:getFilename()
+    local ext = filename:match("%.([^.]+)$"):lower()
+    if ext ~= "jpg" and ext ~= "jpeg" and ext ~= "png" then
+        return
+    end
+
+    love.filesystem.createDirectory("user_images")
+
+    local name = filename:match("([^/\\]+)$")
+    local newFilename = name
+    local counter = 1
+    local base, dotext = name:match("(.+)%.(.+)$")
+    if base and dotext then
+        while love.filesystem.getInfo("user_images/" .. newFilename) do
+            newFilename = base .. "(" .. counter .. ")." .. dotext
+            counter = counter + 1
+        end
+    end
+
+    file:open("r")
+    local data = file:read("data")
+    file:close()
+    love.filesystem.write("user_images/" .. newFilename, data)
+    menu.loadImages()
 end

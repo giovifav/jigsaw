@@ -177,7 +177,14 @@ end
 -- Carica una nuova immagine e inizializza il puzzle
 function puzzle.load(imagePathParam, nOverride, hardcore, skipLoadState)
     local path = imagePathParam or defaultImagePath
-    currentImageName = path:match("img/(.+)$") or path
+    -- Se è un'immagine utente, usa il percorso completo della directory di salvataggio
+    if path:match("^user_images/") then
+        path = love.filesystem.getSaveDirectory() .. "/" .. path
+    else
+        currentImageName = path:match("img/(.+)$") or path
+        path = "img/" .. (path:match("img/(.+)$") or path)
+    end
+    currentImageName = imagePathParam -- salva il percorso originale per leaderboard, etc.
     saveFileName = "save_"..currentImageName:gsub("/", "__")..".json"
     piecesPerSide = nOverride or piecesPerSide
     puzzleImage = love.graphics.newImage(path)

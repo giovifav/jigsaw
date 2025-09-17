@@ -82,17 +82,42 @@ function menu.loadImages()
                 table.insert(categories, file)
             end
         end
+        -- Controlla se esiste la cartella user_images con immagini e aggiungi categoria
+        local userDir = love.filesystem.getInfo("user_images")
+        if userDir and userDir.type == "directory" then
+            local userFiles = love.filesystem.getDirectoryItems("user_images")
+            local hasImages = false
+            for _, ufile in ipairs(userFiles) do
+                if ufile:match("%.jpg$") or ufile:match("%.png$") or ufile:match("%.jpeg$") then
+                    hasImages = true
+                    break
+                end
+            end
+            if hasImages then
+                -- Inserisci all'inizio della lista categorie
+                table.insert(categories, 1, "user_images")
+            end
+        end
     else
         -- Carica le immagini della categoria selezionata
-        local path = "img/"..menu.currentCategory
-        local files = love.filesystem.getDirectoryItems(path)
+        local files
+        if menu.currentCategory == "user_images" then
+            files = love.filesystem.getDirectoryItems("user_images")
+        else
+            files = love.filesystem.getDirectoryItems("img/"..menu.currentCategory)
+        end
         for _, file in ipairs(files) do
             if file:match("%.jpg$") or file:match("%.png$") or file:match("%.jpeg$") then
                 table.insert(images, file)
             end
         end
         for i, file in ipairs(images) do
-            local img = love.graphics.newImage(path.."/"..file)
+            local img
+            if menu.currentCategory == "user_images" then
+                img = love.graphics.newImage("user_images/" .. file)
+            else
+                img = love.graphics.newImage("img/"..menu.currentCategory.."/"..file)
+            end
             -- Crop centrale quadrato
             local iw, ih = img:getWidth(), img:getHeight()
             local size = math.min(iw, ih)
@@ -682,4 +707,4 @@ function menu.keypressed(key)
     end
 end
 
-return menu 
+return menu

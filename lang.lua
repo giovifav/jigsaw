@@ -46,6 +46,7 @@ local translations = {
         categoria_altro = "Altro",
         categoria_persone = "Persone",
         categoria_animali = "Animali",
+        categoria_userimages = "Immagini personali",
         settings_credits = "Crediti",
         credits = "Crediti",
         -- aggiungi altre stringhe qui
@@ -97,6 +98,7 @@ local translations = {
         categoria_altro = "Other",
         categoria_persone = "People",
         categoria_animali = "Animals",
+        categoria_userimages = "User Images",
         settings_credits = "Credits",
         credits = "Credits",
         -- add more strings here
@@ -119,4 +121,4 @@ return {
     t = t,
     set_language = set_language,
     current_lang = function() return current_lang end
-} 
+}
